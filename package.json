@@ -1,8 +1,9 @@
 {
 	"name": "geocpptools",
 	"displayName": "GeoCPPTools",
+	"publisher": "Geometror",
 	"description": "-",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.47.0"
 	},
@@ -10,16 +11,65 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:geocpptools.helloWorld"
+		"onCommand:geocpptools.createCPPClass",
+		"onLanguage:cpp"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "geocpptools.helloWorld",
-				"title": "Hello World"
+				"command": "geocpptools.createCPPClass",
+				"title": "Create C++ class"
 			}
-		]
+		],
+		"keybindings": [
+			{
+				"command": "geocpptools.createCPPClass",
+				"key": "alt+x"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "geocpptools.createCPPClass",
+					"group": "cpp@1",
+					"when": "explorerResourceIsFolder"
+				}
+			]
+		},
+		"configuration": {
+			"title": "GeoCPPTools",
+			"properties": {
+				"geocpptools.includeHelper.watcherExtensions": {
+					"type": "array",
+					"default": [
+						"cpp",
+						"hpp",
+						"c",
+						"h",
+						"cc",
+						"cxx",
+						"c++",
+						"C"
+					],
+					"description": "File extensions, which are watched/observed"
+				},
+				"geocpptools.includeHelper.excludedFolders": {
+					"type": "array",
+					"default": [
+						"lib",
+						"libs",
+						"build",
+						"out",
+						".vscode",
+						".git",
+						"tool",
+						"tools"
+					],
+					"description": "Excluded folders"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -41,5 +91,8 @@
 		"mocha": "^7.1.2",
 		"typescript": "^3.8.3",
 		"vscode-test": "^1.3.0"
+	},
+	"dependencies": {
+		"md5": "^2.3.0"
 	}
 }
