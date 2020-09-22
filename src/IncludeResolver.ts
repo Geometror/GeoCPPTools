@@ -5,6 +5,7 @@ import * as path from 'path'
 import * as readline from 'readline'
 import { stdout } from 'process'
 
+//TODO: Cleanup(path.normalize, pack code in methods)
 export class IncludeResolver implements vscode.Disposable {
 
     private fileMovedMap: Map<string, boolean>
@@ -24,14 +25,14 @@ export class IncludeResolver implements vscode.Disposable {
     }
 
     //When files are renamed and MOVED
-    private onDidRename(e: vscode.FileRenameEvent): void {
+    private onDidRename(movedFileEvt: vscode.FileRenameEvent): void {
 
         //Check wether renames or moved files are of interest
         const watcherExtensions = this.wsConfig.get<string[]>("includeHelper.watcherExtensions",
             ["cpp", "hpp", "c", "h", "cc", "cxx", "c++", "C"])
         let cppFilesFound = false
 
-        e.files.forEach((file) => {
+        movedFileEvt.files.forEach((file) => {
             if (watcherExtensions.includes(path.extname(file.oldUri.fsPath).slice(1)))//Remove dot 
                 cppFilesFound = true
         })
@@ -43,55 +44,51 @@ export class IncludeResolver implements vscode.Disposable {
             "Should the paths of the include directives be adjusted?", "Yes", "No")
         choice.then((str) => {
             if (str === "Yes") {
-                e.files.forEach((file) => {
-
+                movedFileEvt.files.forEach((movedFile) => {
+                    console.log("Processing moved file:" + movedFile.newUri)
                     let rootPath = vscode.workspace.rootPath || ""
                     let sourcePath = path.join(rootPath, this.wsConfig.get<string>("includeHelper.sourceFolder", "src"))
 
                     //TODO: Ermitteln der oberen gemeinsamen Ebene(in spezieller Methode)
                     //-> Relative Pfade daran ausrichten
 
-                    let commonPath = this.findCommonPath(file.oldUri.fsPath, file.newUri.fsPath)
+                    // let commonPath = this.findCommonPath(movedFile.oldUri.fsPath, movedFile.newUri.fsPath)
 
-                    let oldPathRel = path.relative(commonPath, file.oldUri.fsPath)
-                    let newPathRel = path.relative(commonPath, file.newUri.fsPath)
+                    // let oldPathRel = path.relative(commonPath, movedFile.oldUri.fsPath)
+                    // let newPathRel = path.relative(commonPath, movedFile.newUri.fsPath)
 
-                    //Möglich: let movePathRel = this.relativeMovePath(oldPathRel, newPathRel)
-                    let movePathRel = this.relativeMovePath(file.oldUri.fsPath, file.newUri.fsPath)
+                    // //Möglich: let movePathRel = this.relativeMovePath(oldPathRel, newPathRel)
+                    // let movePathRel = this.relativeMovePath(movedFile.oldUri.fsPath, movedFile.newUri.fsPath)
                     //vscode.window.showInformationMessage("COMMON:" + commonPath)
 
                     //Check if file has just been renamed
-                    if (!movePathRel.startsWith(path.sep) && !movePathRel.startsWith('.')) {
-                        //Eigentlich nicht nötig, da nur eine Datei gleichzeitig umbenannt werden kann
-                    }
+                    // if (!movePathRel.startsWith(path.sep) && !movePathRel.startsWith('.')) {
+                    //     //Eigentlich nicht nötig, da nur eine Datei gleichzeitig umbenannt werden kann
+                    // }
 
                     // let diffR = path.relative(newPathRel, oldPathRel)
 
-                    vscode.window.showInformationMessage(oldPathRel + " --> " + newPathRel)
-                    vscode.window.showInformationMessage("Difference: " + movePathRel)
+                    // vscode.window.showInformationMessage(oldPathRel + " --> " + newPathRel)
+                    // vscode.window.showInformationMessage("Difference: " + movePathRel)
 
                     //TODO: 1. Neue #include<>-Pfade für verschobene Dateien ermitteln
                     //-> Beim Verschieben müssen die #include<>-Pfade der vershobenen Dateien, die sich gegenseitig einbinden nicht angepasst werden
                     //-> Beim Umbennen jedoch schon
 
-                    //TODO: 2. Neue #include<>-Pfade für alle anderen, unveränderten Header/Quellcodedatein ermitteln
-
-                    walkDir(sourcePath, (file: string) => {
+                    //Adjust the include directive paths for all other C++ files in the source folder
+                    walkDir(sourcePath, (srcFile: string) => {
                         //Check wether current file was just moved
                         // for(let movedFile of e.files){
                         //     if(movedFile.newUri.fsPath === file)
 
                         //         return
                         // }
-                        const fileContent = fs.readFileSync(file)
-                        if (watcherExtensions.includes(path.extname(file).slice(1))) {
-                            console.log("FOUND CPP FILES")
-                            this.replaceIncludePaths(file)
 
-
+                        if (watcherExtensions.includes(path.extname(srcFile).slice(1))) {
+                            this.replaceIncludePaths(srcFile, movedFile.oldUri.fsPath, movedFile.newUri.fsPath)
                         }
                     })
-
+                    console.log("DONE processing moved file:" + movedFile.newUri)
                 })
             }
 
@@ -99,21 +96,11 @@ export class IncludeResolver implements vscode.Disposable {
 
     }
 
-    private async replaceIncludePaths(file: string) {
+    private replaceIncludePaths(srcFile: string, movedFileOldUri: string, movedFileNewUri: string) {
         const { once } = require('events');
-        // console.log(file)
-        // fs.readFile(file, 'utf8', (err, data) => {console.log(err)
-        //     if (err) vscode.window.showErrorMessage("Could not open file: " + file)
-
-        //     let match
-        //     while ((match = this.includeRegex.exec(data)) != null) {
-        //         vscode.window.showInformationMessage("Found include! idx=" + match.index + "in file " + file)
-        //     }
-
-        // })
 
         const fileRd = readline.createInterface({
-            input: fs.createReadStream(file)
+            input: fs.createReadStream(srcFile)
         });
 
         //Read file line by line and load it into a buffer string
@@ -125,23 +112,59 @@ export class IncludeResolver implements vscode.Disposable {
             let result = includeRegex.exec(line)
             //console.log(line + "|||||" + result)
             if (result != null) {
-                //Replace path 
-                console.log("Found include! idx=" + result.index + "in file " + file)
+                //Parse include directive
+                console.log("Found include! idx=" + result.index + "in file " + srcFile)
                 let pathBegIdx = line.indexOf('"')
-                console.log(pathBegIdx)
-                
+                let PathEndIdx = line.indexOf('"', pathBegIdx + 1)
+                let incPath = line.substring(pathBegIdx + 1, PathEndIdx)
+                console.log("INC PATH:" + incPath)
+                let srcFileDirPath = path.dirname(srcFile) + path.sep
+                console.log("SRC FILE DIR:" + srcFileDirPath)
+                let pointsToFile = path.normalize(srcFileDirPath + incPath)
+                console.log("POINTS TO (NORM):" + pointsToFile)
+                console.log("OLDURI (NORM):" + path.normalize(movedFileOldUri))
+                console.log("NEWURI (NORM):" + path.normalize(movedFileNewUri))
 
-                buffer += "_W_" + line + "\n"
+                //Update path only when include path points to old location of moved file
+                if (movedFileOldUri === pointsToFile) {
+                    //TODO: Preserve comments after include directives
+                    //TODO: Setting for brace type
+
+                    let newIncPath = path.relative(srcFileDirPath, movedFileNewUri)
+
+                    console.log("NEW INC PATH:" + newIncPath)
+
+                    let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
+                    buffer += newLine + "\n"
+
+
+                } else if (movedFileNewUri === srcFile) {
+                    //Handling the include directive of the moved files
+                    let oldDir = path.dirname(movedFileOldUri) + path.sep
+                    let pointsToFile = path.normalize(oldDir + incPath)
+                    console.log("[MOVED]POINTS TO:" + pointsToFile)
+                    let newIncPath = path.relative(srcFileDirPath, pointsToFile)
+                    console.log("[MOVED] NEW INC PATH:" + newIncPath)
+
+                    // if (path.normalize(path.dirname(srcFile)) === path.normalize(path.dirname(movedFileOldUri)))
+                    // newIncPath = newIncPath.substring(path.sep.length + 2) //Cut ../
+
+                    let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
+                    buffer += newLine + "\n"
+                } else {
+                    buffer += line + "\n"
+                }
+
             } else {
                 buffer += line + "\n"
             }
         })
-        await once(fileRd, 'close');
-        console.log("FILE READ!")
-        fs.writeFile(file, buffer,
-            function () {
-                console.log("DONE!")
-            })
+        fileRd.once('close', () => {
+            console.log("FILE READ!")
+            fs.writeFileSync(srcFile, buffer)
+            console.log("DONE!")
+        })
+
     }
 
     private findCommonPath(path1: string, path2: string): string {
