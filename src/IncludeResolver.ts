@@ -2,12 +2,10 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as path from 'path'
-import * as readline from 'readline'
-import { stdout } from 'process'
-import { time, timeEnd } from 'console'
+import { WSASERVICE_NOT_FOUND } from 'constants'
 
 //TODO: Cleanup(path.normalize, pack code in methods)
-export class IncludeResolver implements vscode.Disposable {
+export class IncludeResolver {
 
     private wsConfig: vscode.WorkspaceConfiguration
 
@@ -15,18 +13,28 @@ export class IncludeResolver implements vscode.Disposable {
 
         this.wsConfig = wsConfig
 
-        vscode.workspace.onWillRenameFiles(this.onDidRename, this)
+        vscode.workspace.onDidRenameFiles(this.onDidRename, this)
     }
 
-    //When files are renamed and MOVED
-    public onDidRename(movedFileEvt: vscode.FileRenameEvent): void {
+    public adjustIncludePaths(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], waitForPrompt: boolean) {
+        //TODO: Check wether a directory was moved
+        //path.basename or path.endwith(path.sep)
+        if (fs.statSync(movedFiles[0].newUri.fsPath).isDirectory()) {
+            //Passend? Evtl. rekursiver Durchlauf ausgehend von tiefstem Ordner
+            console.log("DIRECTORY!")
+            walkDir(movedFiles[0].newUri.fsPath, (srcFile: string) => {
+                console.log(srcFile)
+
+            })
+        }
+        console.log("ENDSWITH:" + movedFiles[0].newUri.fsPath)
 
         //Check wether renamed or moved files are C++ files
         const watcherExtensions = this.wsConfig.get<string[]>("includeHelper.watcherExtensions",
             ["cpp", "hpp", "c", "h", "cc", "cxx", "c++", "C"])
         let cppFilesFound = false
 
-        movedFileEvt.files.forEach((file) => {
+        movedFiles.forEach((file) => {
             if (watcherExtensions.includes(path.extname(file.oldUri.fsPath).slice(1)))//Remove dot 
                 cppFilesFound = true
         })
@@ -35,35 +43,45 @@ export class IncludeResolver implements vscode.Disposable {
         if (!cppFilesFound)
             return
 
-        let choice = vscode.window.showInformationMessage("C/C++ header/source files have been renamed/moved. \n" +
-            "Should the paths of the include directives be adjusted?", "Yes", "No")
-        choice.then((str) => {
-            if (str === "Yes") {
-                let rootPath = vscode.workspace.rootPath || ""
-                let sourcePath = path.join(rootPath, this.wsConfig.get<string>("includeHelper.sourceFolder", "src"))
-                let useForwardSlashes = this.wsConfig.get<boolean>("includeHelper.alwaysUseForwardSlash", false)
-                const startTime = process.hrtime()
+        //Check wether confirmation by the user is necessary
+        if (waitForPrompt) {
+            let choice = vscode.window.showInformationMessage("C/C++ header/source files have been renamed/moved. \n" +
+                "Should the paths of the include directives be adjusted?", "Yes", "No")
+            choice.then((str) => {
+                if (str === "Yes") {
+                    this.prepare(movedFiles,watcherExtensions)
+                }
+            })
+        } else {
+            this.prepare(movedFiles, watcherExtensions)
+        }
 
-                movedFileEvt.files.forEach((movedFile) => {
+    }
 
-                    //Adjust the include directive paths for all other C++ files in the source folder
-                    walkDir(sourcePath, (srcFile: string) => {
+    private prepare(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], watcherExtensions: string[]) {
 
-                        if (watcherExtensions.includes(path.extname(srcFile).slice(1))) {
-                            this.replaceIncludePaths(srcFile,
-                                movedFile.oldUri.fsPath,
-                                movedFile.newUri.fsPath,
-                                movedFileEvt.files,
-                                useForwardSlashes)
-                        }
-                    })
-                    console.log("DONE processing moved file:" + movedFile.newUri)
-                })
-                const timePassed = process.hrtime(startTime)
-                vscode.window.showInformationMessage("Paths of Include directives adjusted.(Took " + timePassed + "s)")
-            }
+        let rootPath = vscode.workspace.rootPath || ""
+        let sourcePath = path.join(rootPath, this.wsConfig.get<string>("includeHelper.sourceFolder", "src"))
+        let useForwardSlashes = this.wsConfig.get<boolean>("includeHelper.alwaysUseForwardSlash", false)
+        const startTime = process.hrtime()
 
+        movedFiles.forEach((movedFile) => {
+
+            //Adjust the include directive paths for all other C++ files in the source folder
+            walkDir(sourcePath, (srcFile: string) => {
+
+                if (watcherExtensions.includes(path.extname(srcFile).slice(1))) {
+                    this.replaceIncludePaths(srcFile,
+                        movedFile.oldUri.fsPath,
+                        movedFile.newUri.fsPath,
+                        movedFiles,
+                        useForwardSlashes)
+                }
+            })
+            console.log("DONE processing moved file:" + movedFile.newUri)
         })
+        const timePassed = process.hrtime(startTime)
+        vscode.window.showInformationMessage("Paths of Include directives adjusted.(Took " + timePassed + "s)")
 
     }
 
@@ -136,6 +154,11 @@ export class IncludeResolver implements vscode.Disposable {
         //Save modified file 
         fs.writeFileSync(srcFile, buffer)
 
+    }
+
+    //When files are renamed and MOVED
+    public onDidRename(movedFileEvt: vscode.FileRenameEvent): void {
+        this.adjustIncludePaths(movedFileEvt.files, this.wsConfig.get<boolean>("includeHelper.alwaysShowUserPrompt",true))
     }
 
 }

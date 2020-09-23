@@ -3,7 +3,7 @@
 	"displayName": "GeoCPPTools",
 	"publisher": "Geometror",
 	"description": "-",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"engines": {
 		"vscode": "^1.47.0"
 	},
@@ -40,6 +40,11 @@
 		"configuration": {
 			"title": "GeoCPPTools",
 			"properties": {
+				"geocpptools.includeHelper.enabled": {
+					"type": "boolean",
+					"default": "true",
+					"description": "Enables/disables the IncludeHelper functionality"
+				},
 				"geocpptools.includeHelper.watcherExtensions": {
 					"type": "array",
 					"default": [
@@ -75,8 +80,13 @@
 				},
 				"geocpptools.includeHelper.alwaysUseForwardSlash": {
 					"type": "boolean",
-					"default": "true",
+					"default": "false",
 					"description": "Always use forward slashes in paths, not OS specific separators"
+				},
+				"geocpptools.includeHelper.alwaysShowUserPrompt": {
+					"type": "boolean",
+					"default": "true",
+					"description": "Always ask, wether the include directive paths should be adjusted. If disabled, the adjustment is done automatically when source files are renamed or moved"
 				}
 			}
 		}
