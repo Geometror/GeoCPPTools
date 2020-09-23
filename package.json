@@ -72,6 +72,11 @@
 					"type": "string",
 					"default": "src",
 					"description": "The name of the projects source folder"
+				},
+				"geocpptools.includeHelper.alwaysUseForwardSlash": {
+					"type": "boolean",
+					"default": "true",
+					"description": "Always use forward slashes in paths, not OS specific separators"
 				}
 			}
 		}

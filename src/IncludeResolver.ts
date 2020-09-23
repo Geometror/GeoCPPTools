@@ -4,30 +4,24 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as readline from 'readline'
 import { stdout } from 'process'
+import { time, timeEnd } from 'console'
 
 //TODO: Cleanup(path.normalize, pack code in methods)
 export class IncludeResolver implements vscode.Disposable {
 
-    private fileMovedMap: Map<string, boolean>
     private wsConfig: vscode.WorkspaceConfiguration
 
     public constructor(wsConfig: vscode.WorkspaceConfiguration) {
-        this.fileMovedMap = new Map<string, boolean>()
 
         this.wsConfig = wsConfig
 
-        //*this* has to be passed, otherwise no access to members 
         vscode.workspace.onWillRenameFiles(this.onDidRename, this)
-
-        // vscode.workspace.onWillDeleteFiles(this.onDidDelete, this)
-        // vscode.workspace.onDidCreateFiles(this.onDidCreate,this)
-
     }
 
     //When files are renamed and MOVED
     public onDidRename(movedFileEvt: vscode.FileRenameEvent): void {
 
-        //Check wether renames or moved files are of interest
+        //Check wether renamed or moved files are C++ files
         const watcherExtensions = this.wsConfig.get<string[]>("includeHelper.watcherExtensions",
             ["cpp", "hpp", "c", "h", "cc", "cxx", "c++", "C"])
         let cppFilesFound = false
@@ -37,6 +31,7 @@ export class IncludeResolver implements vscode.Disposable {
                 cppFilesFound = true
         })
 
+        //If no source files are moved, abort
         if (!cppFilesFound)
             return
 
@@ -46,29 +41,26 @@ export class IncludeResolver implements vscode.Disposable {
             if (str === "Yes") {
                 let rootPath = vscode.workspace.rootPath || ""
                 let sourcePath = path.join(rootPath, this.wsConfig.get<string>("includeHelper.sourceFolder", "src"))
-                movedFileEvt.files.forEach((movedFile) => {
-                    console.log("##################################################################")
-                    console.log("Processing moved file:" + movedFile.newUri)
+                let useForwardSlashes = this.wsConfig.get<boolean>("includeHelper.alwaysUseForwardSlash", false)
+                const startTime = process.hrtime()
 
-                    //TODO: 1. Neue #include<>-Pfade für verschobene Dateien ermitteln
-                    //-> Beim Verschieben müssen die #include<>-Pfade der vershobenen Dateien, die sich gegenseitig einbinden nicht angepasst werden
-                    //-> Beim Umbennen jedoch schon
+                movedFileEvt.files.forEach((movedFile) => {
 
                     //Adjust the include directive paths for all other C++ files in the source folder
                     walkDir(sourcePath, (srcFile: string) => {
-                        //Check wether current file was just moved
-                        // for(let movedFile of e.files){
-                        //     if(movedFile.newUri.fsPath === file)
 
-                        //         return
-                        // }
                         if (watcherExtensions.includes(path.extname(srcFile).slice(1))) {
-                            this.replaceIncludePaths(srcFile, movedFile.oldUri.fsPath, movedFile.newUri.fsPath, movedFileEvt.files)
+                            this.replaceIncludePaths(srcFile,
+                                movedFile.oldUri.fsPath,
+                                movedFile.newUri.fsPath,
+                                movedFileEvt.files,
+                                useForwardSlashes)
                         }
                     })
                     console.log("DONE processing moved file:" + movedFile.newUri)
                 })
-                vscode.window.showInformationMessage("Paths of Include directives adjusted.")
+                const timePassed = process.hrtime(startTime)
+                vscode.window.showInformationMessage("Paths of Include directives adjusted.(Took " + timePassed + "s)")
             }
 
         })
@@ -78,70 +70,57 @@ export class IncludeResolver implements vscode.Disposable {
     private replaceIncludePaths(srcFile: string,
         movedFileOldUri: string,
         movedFileNewUri: string,
-        allMovedFiles: ReadonlyArray<{ oldUri: vscode.Uri, newUri: vscode.Uri }>) {
+        allMovedFiles: ReadonlyArray<{ oldUri: vscode.Uri, newUri: vscode.Uri }>,
+        useForwardSlashes: boolean) {
 
         let buffer = ""
         let lines = fs.readFileSync(srcFile, 'utf-8')
             .split('\n')
 
         for (const line of lines) {
+            //Search each line for an include directive
             let includeRegex = new RegExp('#(| +)include(| +)"')
-
-            //Only one match per line allowed/reasonable
             let result = includeRegex.exec(line)
-            //console.log(line + "|||||" + result)
+
             if (result != null) {
                 //Parse include directive
-                console.log("------>\nFound include [SRC FILE: " + srcFile + "]")
                 let pathBegIdx = line.indexOf('"')
                 let PathEndIdx = line.indexOf('"', pathBegIdx + 1)
                 let incPath = line.substring(pathBegIdx + 1, PathEndIdx)
-                console.log("INC PATH:" + incPath)
                 let srcFileDirPath = path.dirname(srcFile) + path.sep
                 let oldDir = path.dirname(movedFileOldUri) + path.sep
                 let pointsToFile = path.normalize(srcFileDirPath + incPath)
                 let movedPointsToFile = path.normalize(oldDir + incPath)
 
-                console.log("POINTS TO:" + pointsToFile)
-                console.log("MOVED POINTS TO:" + pointsToFile)
-                console.log("OLDURI (NORM):" + path.normalize(movedFileOldUri))
-                console.log("NEWURI (NORM):" + path.normalize(movedFileNewUri))
-
-
-
                 //Update path only when include path points to old location of moved file
                 if (movedFileOldUri === pointsToFile) {
-                    //TODO: Preserve comments after include directives
-                    //TODO: Setting for brace type
-
                     let newIncPath = path.relative(srcFileDirPath, movedFileNewUri)
-
-                    console.log("NEW INC PATH:" + newIncPath)
+                    if (useForwardSlashes)
+                        newIncPath.replace('\\', '/')
 
                     let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
                     buffer += newLine + "\n"
 
                 } else if (movedFileNewUri === srcFile) {
                     //Handling the include directive of the moved files
-                    
+
                     //When several files are moved
                     if (allMovedFiles.length > 1) {
                         //Check if the file is part of the moved files, but not itself
                         //If file which the include path is pointing to was also moved do nothing
                         let includes = false
                         for (let fa of allMovedFiles) {
-                            if (fa.oldUri.fsPath === pointsToFile || fa.oldUri.fsPath === movedPointsToFile) includes = true
+                            if (fa.oldUri.fsPath === movedPointsToFile) includes = true
                         }
                         if (includes) {
-                            console.log("FILE WAS ALSO MOVED:" + pointsToFile)
                             buffer += line + "\n"
                             continue
                         }
                     }
                     //TODO: Fix changing path in a weird way
-
                     let newIncPath = path.relative(srcFileDirPath, movedPointsToFile)
-                    console.log("[MOVED] NEW INC PATH:" + newIncPath)
+                    if (useForwardSlashes)
+                        newIncPath.replace('\\', '/')
 
                     let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
                     buffer += newLine + "\n"
@@ -154,14 +133,8 @@ export class IncludeResolver implements vscode.Disposable {
             }
         }
 
-        //Read file line by line and load it into a buffer string
-        console.log("FILE READ!")
+        //Save modified file 
         fs.writeFileSync(srcFile, buffer)
-        console.log("DONE!")
-
-    }
-
-    dispose() {
 
     }
 
