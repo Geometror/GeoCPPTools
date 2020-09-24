@@ -2,7 +2,6 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as path from 'path'
-import { WSASERVICE_NOT_FOUND } from 'constants'
 
 //TODO: Cleanup(path.normalize, pack code in methods)
 export class IncludeResolver {
@@ -19,15 +18,17 @@ export class IncludeResolver {
     public adjustIncludePaths(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], waitForPrompt: boolean) {
         //TODO: Check wether a directory was moved
         //path.basename or path.endwith(path.sep)
-        if (fs.statSync(movedFiles[0].newUri.fsPath).isDirectory()) {
-            //Passend? Evtl. rekursiver Durchlauf ausgehend von tiefstem Ordner
-            console.log("DIRECTORY!")
-            walkDir(movedFiles[0].newUri.fsPath, (srcFile: string) => {
-                console.log(srcFile)
 
-            })
-        }
-        console.log("ENDSWITH:" + movedFiles[0].newUri.fsPath)
+        // if (fs.statSync(movedFiles[0].newUri.fsPath).isDirectory()) {
+        //     //Passend? Evtl. rekursiver Durchlauf ausgehend von tiefstem Ordner
+        //     console.log("DIRECTORY!")
+        //     walkDir(movedFiles[0].newUri.fsPath, (srcFile: string) => {
+        //         console.log(srcFile)
+
+        //     })
+        // }
+
+        console.log("FIRST PATH:" + movedFiles[0].newUri.fsPath)
 
         //Check wether renamed or moved files are C++ files
         const watcherExtensions = this.wsConfig.get<string[]>("includeHelper.watcherExtensions",
@@ -49,7 +50,7 @@ export class IncludeResolver {
                 "Should the paths of the include directives be adjusted?", "Yes", "No")
             choice.then((str) => {
                 if (str === "Yes") {
-                    this.prepare(movedFiles,watcherExtensions)
+                    this.prepare(movedFiles, watcherExtensions)
                 }
             })
         } else {
@@ -66,6 +67,8 @@ export class IncludeResolver {
         const startTime = process.hrtime()
 
         movedFiles.forEach((movedFile) => {
+            console.log("##################################################################")
+            console.log("Processing moved file:" + movedFile.newUri)
 
             //Adjust the include directive paths for all other C++ files in the source folder
             walkDir(sourcePath, (srcFile: string) => {
@@ -101,21 +104,29 @@ export class IncludeResolver {
             let result = includeRegex.exec(line)
 
             if (result != null) {
+                console.log("------>\nFound include [SRC FILE: " + srcFile + "]")
                 //Parse include directive
                 let pathBegIdx = line.indexOf('"')
                 let PathEndIdx = line.indexOf('"', pathBegIdx + 1)
                 let incPath = line.substring(pathBegIdx + 1, PathEndIdx)
                 let srcFileDirPath = path.dirname(srcFile) + path.sep
                 let oldDir = path.dirname(movedFileOldUri) + path.sep
-                let pointsToFile = path.normalize(srcFileDirPath + incPath)
-                let movedPointsToFile = path.normalize(oldDir + incPath)
+                let pointsTo = path.normalize(srcFileDirPath + incPath)
+                let movedPointsTo = path.normalize(oldDir + incPath)
+
+                console.log("INC PATH:" + incPath)
+                console.log("POINTS TO      :" + pointsTo)
+                console.log("MOVED POINTS TO:" + movedPointsTo)
+                console.log("OLDURI (NORM)  :" + path.normalize(movedFileOldUri))
+                console.log("NEWURI (NORM)  :" + path.normalize(movedFileNewUri))
 
                 //Update path only when include path points to old location of moved file
-                if (movedFileOldUri === pointsToFile) {
+                if (movedFileOldUri === pointsTo) {
                     let newIncPath = path.relative(srcFileDirPath, movedFileNewUri)
                     if (useForwardSlashes)
                         newIncPath.replace('\\', '/')
 
+                    console.log("NEW INC PATH:" + newIncPath)
                     let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
                     buffer += newLine + "\n"
 
@@ -126,20 +137,41 @@ export class IncludeResolver {
                     if (allMovedFiles.length > 1) {
                         //Check if the file is part of the moved files, but not itself
                         //If file which the include path is pointing to was also moved do nothing
-                        let includes = false
+                        let doesOldPointToFile = false
+                        let doesNewPointToFile = false
+                        let doesMovedPointToFile = false
+                        let doesNewMovedPointToFile = false
+
                         for (let fa of allMovedFiles) {
-                            if (fa.oldUri.fsPath === movedPointsToFile) includes = true
+                            if (fa.oldUri.fsPath === pointsTo)
+                                doesOldPointToFile = true
+                            if (fa.newUri.fsPath === pointsTo)
+                                doesNewPointToFile = true
+                            if (fa.oldUri.fsPath === movedPointsTo)
+                                doesMovedPointToFile = true
+                            if (fa.newUri.fsPath === movedPointsTo)
+                                doesNewMovedPointToFile = true
                         }
-                        if (includes) {
-                            buffer += line + "\n"
-                            continue
+                        console.log("OLDURI == POINTS_TO:" + doesOldPointToFile)
+                        console.log("NEWURI == POINTS_TO:" + doesNewPointToFile)
+                        console.log("OLDURI == MOVED_POINTS_TO:" + doesMovedPointToFile)
+                        console.log("NEWURI == MOVED_POINTS_TO:" + doesNewMovedPointToFile)
+
+                        //When files of different folders are selected, this condition is
+                        //TODO: Vereinfachen
+                        if (!(!doesOldPointToFile && !doesNewPointToFile && doesMovedPointToFile && !doesNewMovedPointToFile)) {
+                            if (doesMovedPointToFile || doesNewPointToFile) {
+                                buffer += line + "\n"
+                                continue
+                            }
                         }
+
                     }
                     //TODO: Fix changing path in a weird way
-                    let newIncPath = path.relative(srcFileDirPath, movedPointsToFile)
+                    let newIncPath = path.relative(srcFileDirPath, movedPointsTo)
                     if (useForwardSlashes)
                         newIncPath.replace('\\', '/')
-
+                    console.log("[MOVED] NEW INC PATH:" + newIncPath)
                     let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
                     buffer += newLine + "\n"
                 } else {
@@ -158,7 +190,7 @@ export class IncludeResolver {
 
     //When files are renamed and MOVED
     public onDidRename(movedFileEvt: vscode.FileRenameEvent): void {
-        this.adjustIncludePaths(movedFileEvt.files, this.wsConfig.get<boolean>("includeHelper.alwaysShowUserPrompt",true))
+        this.adjustIncludePaths(movedFileEvt.files, this.wsConfig.get<boolean>("includeHelper.alwaysShowUserPrompt", true))
     }
 
 }

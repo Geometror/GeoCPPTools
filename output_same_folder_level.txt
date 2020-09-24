@@ -1,0 +1,580 @@
+Command failed: git config --get remote.origin.url
+
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+swdc-vscode: storing kpm metrics
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+FIRST PATH:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+##################################################################
+Processing moved file:file:///c%3A/Users/hendr/Desktop/VSCodeExtensions/testfolder/src/core/test/Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.cpp]
+INC PATH:BMP.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\BMP.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.cpp]
+INC PATH:../Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.cpp]
+INC PATH:Camera.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Camera.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp]
+INC PATH:Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp]
+INC PATH:Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.cpp]
+INC PATH:HittableList.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\HittableList.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.hpp]
+INC PATH:Hittable.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Hittable.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.cpp]
+INC PATH:Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.cpp]
+INC PATH:Sphere.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Sphere.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp]
+INC PATH:Hittable.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Hittable.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:core/BMP.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\core\BMP.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\BMP.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:core/Camera.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\core\Camera.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\Camera.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\..\Common.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:core/HittableList.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\core\HittableList.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\HittableList.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:core/Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\Ray.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:core/Sphere.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\core\Sphere.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\Sphere.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:core/Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\Vec3.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:materials/Lambert.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\materials\Lambert.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\..\materials\Lambert.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:materials/Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\..\materials\Material.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:Metal.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:true
+OLDURI == MOVED_POINTS_TO:true
+NEWURI == MOVED_POINTS_TO:false
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:materials/Refractive.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\materials\Refractive.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\..\materials\Refractive.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp]
+INC PATH:materials\Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp]
+INC PATH:../Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.cpp]
+INC PATH:Lambert.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Lambert.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.hpp]
+INC PATH:Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp]
+INC PATH:../core/Hittable.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\core\Hittable.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Metal.cpp]
+INC PATH:..\Metal.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Metal.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.cpp]
+INC PATH:Refractive.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Refractive.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.cpp]
+INC PATH:../Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.hpp]
+INC PATH:Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Main.cpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp
+DONE processing moved file:file:///c%3A/Users/hendr/Desktop/VSCodeExtensions/testfolder/src/core/test/Main.cpp
+##################################################################
+Processing moved file:file:///c%3A/Users/hendr/Desktop/VSCodeExtensions/testfolder/src/core/test/Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.cpp]
+INC PATH:BMP.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\BMP.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.cpp]
+INC PATH:../Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.cpp]
+INC PATH:Camera.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Camera.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp]
+INC PATH:Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp]
+INC PATH:Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.cpp]
+INC PATH:HittableList.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\HittableList.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.hpp]
+INC PATH:Hittable.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Hittable.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.cpp]
+INC PATH:Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.cpp]
+INC PATH:Sphere.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Sphere.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp]
+INC PATH:Hittable.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Hittable.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp]
+INC PATH:Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\BMP.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\BMP.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\BMP.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\Camera.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Camera.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Camera.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\..\Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\HittableList.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\HittableList.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\HittableList.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\Ray.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Ray.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Ray.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\Sphere.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Sphere.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Sphere.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\Vec3.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Vec3.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\..\materials\Lambert.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\materials\Lambert.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\..\materials\Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\materials\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:Metal.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Main.cpp]
+INC PATH:..\..\materials\Refractive.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\materials\Refractive.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp]
+INC PATH:materials\Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+OLDURI == POINTS_TO:false
+NEWURI == POINTS_TO:false
+OLDURI == MOVED_POINTS_TO:false
+NEWURI == MOVED_POINTS_TO:false
+[MOVED] NEW INC PATH:..\..\materials\Material.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Vec3.hpp]
+INC PATH:../Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.cpp]
+INC PATH:Lambert.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Lambert.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Lambert.hpp]
+INC PATH:Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp]
+INC PATH:../core/Hittable.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\Hittable.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\core\Hittable.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Metal.cpp]
+INC PATH:..\Metal.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Metal.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+NEW INC PATH:..\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.cpp]
+INC PATH:Refractive.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Refractive.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.cpp]
+INC PATH:../Common.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Common.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\Common.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+------>
+Found include [SRC FILE: c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Refractive.hpp]
+INC PATH:Material.hpp
+POINTS TO      :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\materials\Material.hpp
+MOVED POINTS TO:c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Material.hpp
+OLDURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\Metal.hpp
+NEWURI (NORM)  :c:\Users\hendr\Desktop\VSCodeExtensions\testfolder\src\core\test\Metal.hpp
+DONE processing moved file:file:///c%3A/Users/hendr/Desktop/VSCodeExtensions/testfolder/src/core/test/Metal.hpp
+Command failed: git config --get remote.origin.url
+
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
+swdc-vscode: storing kpm metrics
+ extension.js
+Command failed: git config --get remote.origin.url
+
+ extension.js
