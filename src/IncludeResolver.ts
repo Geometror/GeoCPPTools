@@ -29,7 +29,6 @@ export class IncludeResolver {
             //Handle directory paths
             if (fs.statSync(movedFile.newUri.fsPath).isDirectory()) {
                 let dirNewUri = movedFile.newUri.fsPath
-                console.log("DIRECTORY>")
 
                 //Recursively add all files to list
                 walkDirSync(dirNewUri, (newPath: string) => {
@@ -85,8 +84,6 @@ export class IncludeResolver {
         const startTime = process.hrtime()
 
         movedFiles.forEach((movedFile) => {
-            console.log("##################################################################")
-            console.log("Processing moved file:" + movedFile.newUri)
 
             //Adjust the include directive paths for all other C++ files in the source folder
             walkDirSync(sourcePath, (srcFile: string) => {
@@ -99,7 +96,6 @@ export class IncludeResolver {
                         useForwardSlashes)
                 }
             })
-            console.log("DONE processing moved file:" + movedFile.newUri)
         })
         const timePassed = process.hrtime(startTime)
         vscode.window.showInformationMessage("Paths of Include directives adjusted.(Took " + timePassed + "s)")
@@ -122,7 +118,6 @@ export class IncludeResolver {
             let result = includeRegex.exec(line)
 
             if (result != null) {
-                console.log("------>\nFound include [SRC FILE: " + srcFile + "]")
                 //Parse include directive
                 let pathBegIdx = line.indexOf('"')
                 let PathEndIdx = line.indexOf('"', pathBegIdx + 1)
@@ -132,11 +127,6 @@ export class IncludeResolver {
                 let pointsTo = path.normalize(srcFileDirPath + incPath)
                 let movedPointsTo = path.normalize(oldDir + incPath)
 
-                console.log("INC PATH:" + incPath)
-                console.log("POINTS TO      :" + pointsTo)
-                console.log("MOVED POINTS TO:" + movedPointsTo)
-                console.log("OLDURI (NORM)  :" + path.normalize(movedFileOldUri))
-                console.log("NEWURI (NORM)  :" + path.normalize(movedFileNewUri))
 
                 //Update path only when include path points to old location of moved file
                 if (movedFileOldUri === pointsTo) {
@@ -144,7 +134,6 @@ export class IncludeResolver {
                     if (useForwardSlashes)
                         newIncPath.replace('\\', '/')
 
-                    console.log("NEW INC PATH:" + newIncPath)
                     let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
                     buffer += newLine + "\n"
 
@@ -170,10 +159,6 @@ export class IncludeResolver {
                             if (fa.newUri.fsPath === movedPointsTo)
                                 doesNewMovedPointToFile = true
                         }
-                        console.log("OLDURI == POINTS_TO:" + doesOldPointToFile)
-                        console.log("NEWURI == POINTS_TO:" + doesNewPointToFile)
-                        console.log("OLDURI == MOVED_POINTS_TO:" + doesMovedPointToFile)
-                        console.log("NEWURI == MOVED_POINTS_TO:" + doesNewMovedPointToFile)
 
                         //Fix for specific cases where the selected files are distributes over several directory levels
                         //TODO: Reduce/Simplify
@@ -188,7 +173,6 @@ export class IncludeResolver {
                     let newIncPath = path.relative(srcFileDirPath, movedPointsTo)
                     if (useForwardSlashes)
                         newIncPath.replace('\\', '/')
-                    console.log("[MOVED] NEW INC PATH:" + newIncPath)
                     let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
                     buffer += newLine + "\n"
 
