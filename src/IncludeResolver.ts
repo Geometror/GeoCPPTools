@@ -16,18 +16,40 @@ export class IncludeResolver {
     }
 
     public adjustIncludePaths(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], waitForPrompt: boolean) {
-        //TODO: Check wether a directory was moved
-        //path.basename or path.endwith(path.sep)
+        
+        //TODO: Dissolve paths
 
-        // if (fs.statSync(movedFiles[0].newUri.fsPath).isDirectory()) {
-        //     //Passend? Evtl. rekursiver Durchlauf ausgehend von tiefstem Ordner
-        //     console.log("DIRECTORY!")
-        //     walkDir(movedFiles[0].newUri.fsPath, (srcFile: string) => {
-        //         console.log(srcFile)
+        let movedFilesDet: { oldUri: vscode.Uri, newUri: vscode.Uri }[] = new Array()
+        for (let movedFile of movedFiles) {
+            if (fs.statSync(movedFile.newUri.fsPath).isDirectory()) {
+                let dirNewUri = movedFile.newUri.fsPath
+                console.log("DIRECTORY>")
 
-        //     })
-        // }
+                walkDir(dirNewUri, (newPath: string) => {
+                    let filePathRel = path.relative(movedFile.newUri.fsPath,newPath)
 
+                    let oldFilePath = "file:///" + movedFile.oldUri.fsPath + path.sep + filePathRel
+                    let newFilePath = "file:///" + newPath
+                    let oldFileUri = vscode.Uri.parse(oldFilePath)
+                    let newFileUri = vscode.Uri.parse(newFilePath)
+
+                    // console.log(oldFilePath)
+                    // console.log(newFilePath
+
+                    movedFilesDet.push({ oldUri: oldFileUri, newUri: newFileUri })
+
+                    console.log("URI OLD:" + oldFileUri.fsPath)
+                    console.log("URI NEW:" + newFileUri.fsPath)
+                })
+
+            } else {
+                //Normal file, add to list
+                movedFilesDet.push(movedFile)
+                console.log("URI OLD:" + movedFile.oldUri.fsPath)
+                console.log("URI NEW:" + movedFile.newUri.fsPath)
+
+            }
+        }
         console.log("FIRST PATH:" + movedFiles[0].newUri.fsPath)
 
         //Check wether renamed or moved files are C++ files
@@ -35,7 +57,7 @@ export class IncludeResolver {
             ["cpp", "hpp", "c", "h", "cc", "cxx", "c++", "C"])
         let cppFilesFound = false
 
-        movedFiles.forEach((file) => {
+        movedFilesDet.forEach((file) => {
             if (watcherExtensions.includes(path.extname(file.oldUri.fsPath).slice(1)))//Remove dot 
                 cppFilesFound = true
         })
@@ -50,11 +72,11 @@ export class IncludeResolver {
                 "Should the paths of the include directives be adjusted?", "Yes", "No")
             choice.then((str) => {
                 if (str === "Yes") {
-                    this.prepare(movedFiles, watcherExtensions)
+                    this.prepare(movedFilesDet, watcherExtensions)
                 }
             })
         } else {
-            this.prepare(movedFiles, watcherExtensions)
+            this.prepare(movedFilesDet, watcherExtensions)
         }
 
     }

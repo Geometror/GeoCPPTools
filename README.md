@@ -1,6 +1,6 @@
 # GeoCPPTools
 
-A small extension to improve the workflow when working with C++.
+A small extension to improve the C++ workflow in VS Code
 
 ## Features
 
