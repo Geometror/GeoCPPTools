@@ -15,73 +15,69 @@ export class IncludeResolver {
         vscode.workspace.onDidRenameFiles(this.onDidRename, this)
     }
 
-    public adjustIncludePaths(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], waitForPrompt: boolean) {
-        
-        //TODO: Dissolve paths
+    //When files are renamed and MOVED
+    public onDidRename(movedFileEvt: vscode.FileRenameEvent): void {
+        this.adjustIncludeDirectivePaths(movedFileEvt.files, this.wsConfig.get<boolean>("includeHelper.alwaysShowUserPrompt", true))
+    }
 
-        let movedFilesDet: { oldUri: vscode.Uri, newUri: vscode.Uri }[] = new Array()
-        for (let movedFile of movedFiles) {
+    public adjustIncludeDirectivePaths(movedUrisRaw: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[],
+        waitForPrompt: boolean) {
+
+        let movedFileUris: { oldUri: vscode.Uri, newUri: vscode.Uri }[] = new Array()
+        for (let movedFile of movedUrisRaw) {
+
+            //Handle directory paths
             if (fs.statSync(movedFile.newUri.fsPath).isDirectory()) {
                 let dirNewUri = movedFile.newUri.fsPath
                 console.log("DIRECTORY>")
 
-                walkDir(dirNewUri, (newPath: string) => {
-                    let filePathRel = path.relative(movedFile.newUri.fsPath,newPath)
+                //Recursively add all files to list
+                walkDirSync(dirNewUri, (newPath: string) => {
+                    let filePathRel = path.relative(movedFile.newUri.fsPath, newPath)
 
                     let oldFilePath = "file:///" + movedFile.oldUri.fsPath + path.sep + filePathRel
                     let newFilePath = "file:///" + newPath
                     let oldFileUri = vscode.Uri.parse(oldFilePath)
                     let newFileUri = vscode.Uri.parse(newFilePath)
 
-                    // console.log(oldFilePath)
-                    // console.log(newFilePath
-
-                    movedFilesDet.push({ oldUri: oldFileUri, newUri: newFileUri })
-
-                    console.log("URI OLD:" + oldFileUri.fsPath)
-                    console.log("URI NEW:" + newFileUri.fsPath)
+                    movedFileUris.push({ oldUri: oldFileUri, newUri: newFileUri })
                 })
 
             } else {
-                //Normal file, add to list
-                movedFilesDet.push(movedFile)
-                console.log("URI OLD:" + movedFile.oldUri.fsPath)
-                console.log("URI NEW:" + movedFile.newUri.fsPath)
-
+                //Source file, add to list
+                movedFileUris.push(movedFile)
             }
         }
-        console.log("FIRST PATH:" + movedFiles[0].newUri.fsPath)
 
         //Check wether renamed or moved files are C++ files
         const watcherExtensions = this.wsConfig.get<string[]>("includeHelper.watcherExtensions",
             ["cpp", "hpp", "c", "h", "cc", "cxx", "c++", "C"])
-        let cppFilesFound = false
 
-        movedFilesDet.forEach((file) => {
+        let cppFilesFound = false
+        movedFileUris.forEach((file) => {
             if (watcherExtensions.includes(path.extname(file.oldUri.fsPath).slice(1)))//Remove dot 
                 cppFilesFound = true
         })
-
-        //If no source files are moved, abort
         if (!cppFilesFound)
             return
 
-        //Check wether confirmation by the user is necessary
+        //Check wether confirmation by the user is necessary (property: alwaysShowUserPrompt)
         if (waitForPrompt) {
             let choice = vscode.window.showInformationMessage("C/C++ header/source files have been renamed/moved. \n" +
                 "Should the paths of the include directives be adjusted?", "Yes", "No")
             choice.then((str) => {
                 if (str === "Yes") {
-                    this.prepare(movedFilesDet, watcherExtensions)
+                    this.walkThroughFiles(movedFileUris, watcherExtensions)
                 }
             })
         } else {
-            this.prepare(movedFilesDet, watcherExtensions)
+            this.walkThroughFiles(movedFileUris, watcherExtensions)
         }
 
     }
 
-    private prepare(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], watcherExtensions: string[]) {
+
+    private walkThroughFiles(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], watcherExtensions: string[]) {
 
         let rootPath = vscode.workspace.rootPath || ""
         let sourcePath = path.join(rootPath, this.wsConfig.get<string>("includeHelper.sourceFolder", "src"))
@@ -93,7 +89,7 @@ export class IncludeResolver {
             console.log("Processing moved file:" + movedFile.newUri)
 
             //Adjust the include directive paths for all other C++ files in the source folder
-            walkDir(sourcePath, (srcFile: string) => {
+            walkDirSync(sourcePath, (srcFile: string) => {
 
                 if (watcherExtensions.includes(path.extname(srcFile).slice(1))) {
                     this.replaceIncludePaths(srcFile,
@@ -179,23 +175,23 @@ export class IncludeResolver {
                         console.log("OLDURI == MOVED_POINTS_TO:" + doesMovedPointToFile)
                         console.log("NEWURI == MOVED_POINTS_TO:" + doesNewMovedPointToFile)
 
-                        //When files of different folders are selected, this condition is
-                        //TODO: Vereinfachen
-                        if (!(!doesOldPointToFile && !doesNewPointToFile && doesMovedPointToFile && !doesNewMovedPointToFile)) {
-                            if (doesMovedPointToFile || doesNewPointToFile) {
-                                buffer += line + "\n"
-                                continue
-                            }
+                        //Fix for specific cases where the selected files are distributes over several directory levels
+                        //TODO: Reduce/Simplify
+                        if (!(!doesOldPointToFile && !doesNewPointToFile && doesMovedPointToFile && !doesNewMovedPointToFile)
+                            && (doesMovedPointToFile || doesNewPointToFile)) {
+                            buffer += line + "\n"
+                            continue
                         }
 
                     }
-                    //TODO: Fix changing path in a weird way
+
                     let newIncPath = path.relative(srcFileDirPath, movedPointsTo)
                     if (useForwardSlashes)
                         newIncPath.replace('\\', '/')
                     console.log("[MOVED] NEW INC PATH:" + newIncPath)
                     let newLine = line.slice(0, pathBegIdx + 1) + newIncPath + line.slice(PathEndIdx)
                     buffer += newLine + "\n"
+
                 } else {
                     buffer += line + "\n"
                 }
@@ -210,18 +206,13 @@ export class IncludeResolver {
 
     }
 
-    //When files are renamed and MOVED
-    public onDidRename(movedFileEvt: vscode.FileRenameEvent): void {
-        this.adjustIncludePaths(movedFileEvt.files, this.wsConfig.get<boolean>("includeHelper.alwaysShowUserPrompt", true))
-    }
-
 }
 
-function walkDir(dir: string, callback: CallableFunction) {
+function walkDirSync(dir: string, callback: CallableFunction) {
     fs.readdirSync(dir).forEach(f => {
         let dirPath = path.join(dir, f);
         let isDirectory = fs.statSync(dirPath).isDirectory();
         isDirectory ?
-            walkDir(dirPath, callback) : callback(path.join(dir, f));
+            walkDirSync(dirPath, callback) : callback(path.join(dir, f));
     });
 };
