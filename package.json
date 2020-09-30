@@ -2,8 +2,10 @@
 	"name": "geocpptools",
 	"displayName": "GeoCPPTools",
 	"publisher": "Geometror",
-	"description": "-",
+	"description": "Tools for improved C++ workflow",
 	"version": "0.2.0",
+	"repository": "https://github.com/Geometror/GeoCPPTools",
+	"icon":"images/icon.png",
 	"engines": {
 		"vscode": "^1.47.0"
 	},
