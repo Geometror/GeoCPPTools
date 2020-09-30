@@ -5,14 +5,13 @@ A small extension to improve the C++ workflow in VS Code
 ## Features
 
 - Create a C++ class (header and source file in the same directory)
-
+- Automatically adjust include directive paths after moving or renaming files
 
 ## Extension Settings
 
-None yet
+TODO: Add settings information
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
+**0.2.0:** Added Include directive adjuster
 **0.1.0:** Initial release.
