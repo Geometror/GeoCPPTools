@@ -3,7 +3,7 @@
 	"displayName": "GeoCPPTools",
 	"publisher": "Geometror",
 	"description": "Tools for improved C++ workflow",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"repository": "https://github.com/Geometror/GeoCPPTools",
 	"icon":"images/icon.png",
 	"engines": {
@@ -16,12 +16,16 @@
 		"onCommand:geocpptools.createCPPClass",
 		"onLanguage:cpp"
 	],
-	"main": "./out/extension.js",
+	"main": "./out/Extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "geocpptools.createCPPClass",
 				"title": "Create C++ class"
+			},
+			{
+				"command": "geocpptools.changeFunctionSignature",
+				"title": "Change signature of a function/method"
 			}
 		],
 		"keybindings": [
@@ -45,7 +49,7 @@
 				"geocpptools.includeHelper.enabled": {
 					"type": "boolean",
 					"default": "true",
-					"description": "Enables/disables the IncludeHelper functionality"
+					"description": "[EXPERIMENTAL FEATURE, USE AT OWN RISK] Enables the IncludeHelper functionality"
 				},
 				"geocpptools.includeHelper.watcherExtensions": {
 					"type": "array",
@@ -60,20 +64,6 @@
 						"C"
 					],
 					"description": "File extensions, which are watched/observed"
-				},
-				"geocpptools.includeHelper.excludedFolders": {
-					"type": "array",
-					"default": [
-						"lib",
-						"libs",
-						"build",
-						"out",
-						".vscode",
-						".git",
-						"tool",
-						"tools"
-					],
-					"description": "Excluded folders"
 				},
 				"geocpptools.includeHelper.sourceFolder": {
 					"type": "string",

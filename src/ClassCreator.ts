@@ -2,11 +2,11 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export class ClassCreator implements vscode.Disposable {
+export class ClassCreator{
 
     public constructor(context: vscode.ExtensionContext) {
         let createCPPClass = vscode.commands.registerCommand('geocpptools.createCPPClass', async (fileUri) => {
-            // The code you place here will be executed every time your command is executed
+           
             console.log(fileUri)
 
             //TODO: Check wether a folder is open
@@ -16,8 +16,6 @@ export class ClassCreator implements vscode.Disposable {
                 vscode.window.showErrorMessage("Failed to create class: No open workspace/folder")
                 return
             }
-
-
 
             let targetDir = fileUri.fsPath
             // if (context != undefined) {
@@ -48,9 +46,6 @@ export class ClassCreator implements vscode.Disposable {
         context.subscriptions.push(createCPPClass)
     }
     
-    dispose() {
-
-    }
 }
 
 
