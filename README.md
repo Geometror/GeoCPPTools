@@ -8,8 +8,9 @@ A small extension to improve the C++ workflow in VS Code
 - [EXPERIMENTAL] Automatically adjust include directive paths after moving or renaming files
     Moving several folders and/or files at once is supported!
     
-    Restrictions:   -Only one source directory is currently supported
-                    -Only recommended for small projects since it uses rather inefficient methods
+    Restrictions:   
+    - Only one source directory is currently supported
+    - Only recommended for small projects since it uses rather inefficient methods
 
 ## Release Notes
 
