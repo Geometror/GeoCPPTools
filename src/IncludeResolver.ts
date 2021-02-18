@@ -15,12 +15,21 @@ export class IncludeResolver {
 
         vscode.workspace.onDidChangeConfiguration(this.updateConfig,undefined)
         vscode.workspace.onDidRenameFiles(this.onDidRenameFiles,this)
+        vscode.workspace.onWillRenameFiles(this.onWillRenameFiles,this)
     }   
 
     //Keep cached configuration up to date
     public updateConfig(){
         console.log("Config changed.")
         cfg = vscode.workspace.getConfiguration("geocpptools")
+    }
+
+    public onWillRenameFiles(movedFileEvt: vscode.FileRenameEvent){
+        let active = cfg.get<boolean>("includeHelper.enabled", false) 
+        if (active){
+            //Save all open files first
+            vscode.commands.executeCommand("workbench.action.files.saveAll")
+        }
     }
 
     //When files are renamed and MOVED
@@ -70,25 +79,23 @@ export class IncludeResolver {
         if (!cppFilesFound)
             return
         
-        //TODO: CURRENTLY BROKEN DUE TO API CHANGES(1.52 FILE OPERATIONS UNDO/REDO)
-        //Check wether confirmation by the user is necessary (property: alwaysShowUserPrompt)
-        // if (waitForPrompt) {
-        //     let choice = vscode.window.showInformationMessage("C/C++ header/source files have been renamed/moved. \n" +
-        //         "Should the paths of the include directives be adjusted? [Only recommended for small projects]", "Yes", "No")
-        //     choice.then((str) => {
-        //         if (str === "Yes") {
-        //             this.walkThroughFiles(movedFileUris, watcherExtensions)
-        //         }
-        //     })
-        // } else {
-        //     this.walkThroughFiles(movedFileUris, watcherExtensions)
-        // }
+        if (waitForPrompt) {
+            let choice = vscode.window.showInformationMessage("C/C++ header/source files have been renamed/moved. \n" +
+                "Should the paths of the include directives be adjusted? [Only recommended for small projects]", "Yes", "No")
+            choice.then((str) => {
+                if (str === "Yes") {
+                    this.walkThroughFiles(movedFileUris, watcherExtensions)
+                }
+            })
+        } else {
+            this.walkThroughFiles(movedFileUris, watcherExtensions)
+        }
 
-        this.walkThroughFiles(movedFileUris, watcherExtensions)
     }
 
 
     private walkThroughFiles(movedFiles: readonly { oldUri: vscode.Uri, newUri: vscode.Uri }[], watcherExtensions: string[]) {
+
 
         let rootPath = vscode.workspace.workspaceFolders![0].uri.fsPath || ""
 

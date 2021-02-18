@@ -7,7 +7,7 @@
 	"repository": "https://github.com/Geometror/GeoCPPTools",
 	"icon":"images/icon.png",
 	"engines": {
-		"vscode": "^1.47.0"
+		"vscode": "^1.53.0"
 	},
 	"categories": [
 		"Other"
