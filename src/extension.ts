@@ -1,8 +1,8 @@
 
 import * as vscode from 'vscode'
-import {IncludeResolver} from "./IncludeResolver"
-import {ClassCreator} from "./ClassCreator"
-import {FunctionHelper} from "./FunctionHelper"
+import { IncludeResolver } from "./IncludeResolver"
+import { ClassCreator } from "./ClassCreator"
+import { FunctionHelper } from "./FunctionHelper"
 import { QuickIncluder } from './QuickIncluder'
 
 export function activate(context: vscode.ExtensionContext) {
@@ -11,12 +11,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 	//Loading configuration
 	let config = vscode.workspace.getConfiguration("geocpptools")
-	
+
 	let quickIncluder = new QuickIncluder(context)
-	let incResolver = new IncludeResolver()
+	let incResolver = new IncludeResolver(context)
 	let classCreator = new ClassCreator(context)
-	let functionHelper = new FunctionHelper(context,config)
-	
+	let functionHelper = new FunctionHelper(context)
+
 	console.log("GeoCPPTools active.")
 }
 

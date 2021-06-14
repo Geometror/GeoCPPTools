@@ -2,10 +2,11 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as path from 'path'
+import { ExtensionModule } from './ExtensionModule'
 
 var cfg : vscode.WorkspaceConfiguration
 
-export class IncludeResolver {
+export class IncludeResolver extends ExtensionModule{
 
     // Relative mode (currently)
     //TODO: Absolute mode (faster and maybe better/more commonly usable)
@@ -13,8 +14,8 @@ export class IncludeResolver {
 
     // public wsConfig: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration("geocpptools")
 
-    public constructor() {
-
+    public constructor(context: vscode.ExtensionContext) {
+        super(context)
         cfg = vscode.workspace.getConfiguration("geocpptools")
 
         vscode.workspace.onDidChangeConfiguration(this.updateConfig,undefined)

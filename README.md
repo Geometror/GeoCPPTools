@@ -1,10 +1,11 @@
 # GeoCPPTools
 
-A small extension to improve the C++ workflow in VS Code
+A customizable extension to improve the C++ workflow in VS Code
 
 ## Features
 
-- Create a C++ class (header and source file in the same directory)
+- Create a C++ class (customizable through different modes)
+- Quickly add include statement from anywhere(two modes)
 - ***[EXPERIMENTAL]*** Automatically adjust include directive paths after moving or renaming files
     Moving several folders and/or files at once is supported!
     

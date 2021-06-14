@@ -3,7 +3,7 @@
 	"displayName": "GeoCPPTools",
 	"publisher": "Geometror",
 	"description": "Tools for improved C++ workflow",
-	"version": "0.2.2",
+	"version": "0.3.0",
 	"repository": "https://github.com/Geometror/GeoCPPTools",
 	"icon": "images/icon.png",
 	"engines": {
@@ -53,10 +53,37 @@
 		"configuration": {
 			"title": "GeoCPPTools",
 			"properties": {
+				"geocpptools.classCreator.mode": {
+					"type": "string",
+					"description": "Determines the behavior of class creation command (where and how the header and source files will be created).",
+					"default": "default",
+					"enum": [
+						"default",
+						"separate folders",
+						"separate folders (source in selected folder)",
+						"new folder"
+					],
+					"enumDescriptions": [
+						"header and source files are created in the selected directory.",
+						"header and source files are created separately in the specified directories.",
+						"header files are created separately in the specified directories, source files in the selected directory.",
+						"header and source files are created in a new subdirectory of the selected folder."
+					]
+				},
+				"geocpptools.classCreator.sourceFolder": {
+					"type": "string",
+					"default": "${workspaceFolder}/src",
+					"description": "The directory where C++ source files should be created."
+				},
+				"geocpptools.classCreator.headerFolder": {
+					"type": "string",
+					"default": "${workspaceFolder}/include",
+					"description": "The directory where header files should be created."
+				},
 				"geocpptools.includeHelper.enabled": {
 					"type": "boolean",
 					"default": "true",
-					"description": "[EXPERIMENTAL FEATURE, USE AT OWN RISK] Enables the IncludeHelper functionality"
+					"description": "[EXPERIMENTAL FEATURE, USE AT OWN RISK] Enables the IncludeHelper functionality."
 				},
 				"geocpptools.includeHelper.watcherExtensions": {
 					"type": "array",
@@ -75,23 +102,30 @@
 				"geocpptools.includeHelper.sourceFolder": {
 					"type": "string",
 					"default": "src",
-					"description": "The name of the projects source folder"
+					"description": "The name of the projects source folder."
 				},
 				"geocpptools.includeHelper.alwaysUseForwardSlash": {
 					"type": "boolean",
 					"default": "false",
-					"description": "Always use forward slashes in paths, not OS specific separators"
+					"description": "Always use forward slashes in paths, not OS specific separators."
 				},
 				"geocpptools.includeHelper.alwaysShowUserPrompt": {
 					"type": "boolean",
 					"default": "true",
-					"description": "Always ask, wether the include directive paths should be adjusted. If disabled, the adjustment is done automatically when source files are renamed or moved"
+					"description": "Always ask, wether the include directive paths should be adjusted. If disabled, the adjustment is done automatically when source files are renamed or moved."
 				},
-				"geocpptools.quickIncluder.mode":{
-					"type":"string",
-					"description": "Jump to top will move the cursor and insert the include statement at the top of the current file, enabling the use of path intellisense. It is recommended to use the editor command 'Go back' (default shortcut: Alt + left arrow) to jump back where you left off.",
-					"default":"jump to top",
-					"enum":["jump to top","do not jump to top"]
+				"geocpptools.quickIncluder.mode": {
+					"type": "string",
+					"description": "Determines the behavior of the quick include statement insertion command.",
+					"default": "jump to top",
+					"enum": [
+						"jump to top",
+						"do not jump to top"
+					],
+					"enumDescriptions": [
+						"Moves the cursor and insert the include statement at the top of the current file, which enables the use of path intellisense. It is recommended to use the editor command 'Go back' (default shortcut: Alt + left arrow) to jump back where you left off.",
+						"Leaves the cursor at its current position and shows an input box to type in the file to include"
+					]
 				}
 			}
 		}
@@ -111,10 +145,10 @@
 		"@types/vscode": "^1.56.0",
 		"@typescript-eslint/eslint-plugin": "^4.24.0",
 		"@typescript-eslint/parser": "^4.24.0",
-		"eslint": "^7.26.0",
+		"eslint": "^7.28.0",
 		"glob": "^7.1.7",
-		"mocha": "^8.4.0",
-		"typescript": "^4.2.4",
+		"mocha": "^9.0.0",
+		"typescript": "^4.3.2",
 		"vscode-test": "^1.5.2"
 	}
 }

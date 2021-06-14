@@ -2,6 +2,14 @@
 
 All notable changes to the "geocpptools" extension will be documented in this file.
 
+## [0.3.0]
+
+### Added:
+- QuickIncluder (quickly add include statements)
+- Several modes and options to ClassCreator
+
+### Fixes
+- Several minor bugs/bad behavior
 ## [0.2.2]
 
 ### Added:
