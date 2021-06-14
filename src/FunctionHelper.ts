@@ -7,7 +7,7 @@ export class FunctionHelper implements vscode.Disposable {
     public constructor(context: vscode.ExtensionContext, wsConfig: vscode.WorkspaceConfiguration) {
 
         let changeMethodSignature = vscode.commands.registerCommand('geocpptools.changeFunctionSignature', async (fileUri) => {
-            const editor = vscode.window.activeTextEditor!;
+            const editor = vscode.window.activeTextEditor!
 
             console.log("FORWARDED VALUE:" + editor.document.uri)
             console.log("START CHAR POS:" + editor.selection.start.character)
@@ -22,16 +22,13 @@ export class FunctionHelper implements vscode.Disposable {
             
             if (editor.selection.isEmpty) {
                 //TODO: Determine method signature
-
-
-                
                 let options = {
                     value: "djsfljdlsfj",
                     prompt: "Change method signature:"
                 }
                 vscode.window.showInputBox(options)
             }
-        });
+        })
         context.subscriptions.push(changeMethodSignature)
     }
 

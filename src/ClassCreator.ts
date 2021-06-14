@@ -1,6 +1,6 @@
-import * as vscode from 'vscode';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as vscode from 'vscode'
+import * as fs from 'fs'
+import * as path from 'path'
 
 export class ClassCreator{
 
@@ -11,7 +11,7 @@ export class ClassCreator{
 
             //TODO: Check wether a folder is open
 
-            let projectDir = vscode.workspace.rootPath
+            let projectDir = vscode.workspace.workspaceFolders![0].uri.fsPath || ""
             if (projectDir == undefined || fileUri == undefined) {
                 vscode.window.showErrorMessage("Failed to create class: No open workspace/folder")
                 return
@@ -42,7 +42,7 @@ export class ClassCreator{
                 createClass(targetDir, className)
             })
 
-        });
+        })
         context.subscriptions.push(createCPPClass)
     }
     
@@ -66,8 +66,8 @@ function createClass(targetDir: string, name: string) {
     //Mode 2: Header in include dir/Source in src dir
     //Mode 3: Create dedicated folder for class(header and source)
 
-    let headerFileDir: string = targetDir;
-    let srcFileDir: string = targetDir;
+    let headerFileDir: string = targetDir
+    let srcFileDir: string = targetDir
 
     createHeaderFile(headerFileDir, name)
     createSourceFile(srcFileDir, name)
@@ -95,9 +95,9 @@ function createHeaderFile(dir: string, name: string) {
         `private:\n` +
         `\n` +
         `\n` +
-        `};\n` +
+        `}\n` +
         ``
-    writeFile(dir, `${name}.hpp`, headerFileData);
+    writeFile(dir, `${name}.hpp`, headerFileData)
 }
 
 function createSourceFile(dir: string, name: string) {

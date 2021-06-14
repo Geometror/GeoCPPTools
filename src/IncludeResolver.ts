@@ -7,6 +7,10 @@ var cfg : vscode.WorkspaceConfiguration
 
 export class IncludeResolver {
 
+    // Relative mode (currently)
+    //TODO: Absolute mode (faster and maybe better/more commonly usable)
+    //TODO: Use editor.edit and do not rewrite whole files
+
     // public wsConfig: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration("geocpptools")
 
     public constructor() {
@@ -215,9 +219,9 @@ export class IncludeResolver {
 
 function walkDirSync(dir: string, callback: CallableFunction) {
     fs.readdirSync(dir).forEach(f => {
-        let dirPath = path.join(dir, f);
-        let isDirectory = fs.statSync(dirPath).isDirectory();
+        let dirPath = path.join(dir, f)
+        let isDirectory = fs.statSync(dirPath).isDirectory()
         isDirectory ?
-            walkDirSync(dirPath, callback) : callback(path.join(dir, f));
-    });
-};
+            walkDirSync(dirPath, callback) : callback(path.join(dir, f))
+    })
+}
